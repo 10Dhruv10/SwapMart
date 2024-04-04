@@ -1,0 +1,105 @@
+{% extends 'display/base.html' %}
+
+{% block content %}
+<div class="container" style="margin: 0 auto; min-height: 100vh;">
+  <div class="row justify-content-center align-items-center" style="height: 100vh;">
+    <div class="col-md-6">
+      <div class="shadow p-4 mb-5 bg-body rounded form-container">
+        <h1 class="text-center mb-4">Fill the Form</h1>
+  
+        {% if submitted %}
+          <p class="text-success text-center">Your form was submitted successfully.</p>
+        {% endif %}
+  
+        <form id="submitForm" action="" method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            {{ form.as_p }}
+          </div>
+          <div class="text-center mt-4">
+            <button id="submitButton" type="button" class="btn btn-purple-gradient btn-lg wiggle-button">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .form-container {
+    background-color: #ffffff; /* White background color */
+    padding: 2rem; /* Add padding */
+    border: 1px solid #ddd; /* Optional border */
+    border-radius: 4px; /* Rounded corners */
+    height: auto; /* Adjust height as needed */
+    max-width: 500px; /* Limit the width of the form */
+    margin: 0 auto; /* Center the form horizontally */
+  }
+
+  .form-container * {
+    color: #000000; /* Black text color */
+  }
+
+  .btn-purple-gradient {
+    background: linear-gradient(135deg, #DACCFB, #A29BD4); /* Purple gradient button color */
+    color: #ffffff; /* White text color for button (can be changed) */
+  }
+
+  .wiggle-button {
+    animation: wiggle 0.5s ease-in-out forwards;
+  }
+
+  /* Adjust validation message style */
+  .errorlist {
+    color: #ff0000; /* Red color for error messages */
+    margin-top: 0.5rem; /* Add some space between input and error message */
+    list-style-type: none; /* Remove bullet points */
+    padding-left: 0; /* Remove left padding */
+  }
+
+  @keyframes clicked {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.56); }
+    100% { transform: scale(1); }
+  }
+</style>
+
+<script>
+  const submitButton = document.getElementById('submitButton');
+  const submitForm = document.getElementById('submitForm');
+
+  submitButton.addEventListener('click', () => {
+    // Check if any fields are empty
+    const formInputs = document.querySelectorAll('#submitForm input[type="text"]');
+    let isEmptyField = false;
+
+    // Reverse the order of iteration to start from the top
+    for (let i = 0; i < formInputs.length; i++) {
+      const input = formInputs[i];
+      if (input.value.trim() === '') {
+        isEmptyField = true;
+        // Display validation message for the first empty field encountered
+        input.setCustomValidity('This field is required.');
+        input.reportValidity(); // Show validation message
+        break; // Exit the loop after the first empty field is found
+      } else {
+        input.setCustomValidity('');
+      }
+    }
+
+    if (!isEmptyField) {
+      // If no empty fields, submit the form
+      submitForm.submit();
+      submitButton.classList.add('clicked');
+      setTimeout(() => {
+        submitButton.classList.remove('clicked');
+      }, 1000);
+    }
+  });
+</script>
+
+
+
+{% endblock %}
+
+

@@ -1,0 +1,54 @@
+{% extends 'display/base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center" style="height: 100vh;">
+        <div class="col-md-4">
+            <div class="card shadow p-5 mb-5 bg-body rounded">
+                <h1 class="text-center mb-4">Login</h1>
+
+                <form action="" method="POST">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password">
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg mt-3">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-body {
+        background-color: #CBC3E3; /* Background color */
+    }
+
+    .card {
+        border: none; /* Remove card border */
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #BCA5D2, #9388B3); /* Purple gradient button color */
+        border: none; /* Remove button border */
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #9388B3, #736397); /* Darker purple gradient color on hover */
+    }
+</style>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,27 @@
+{% extends 'display/base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% if user.username == displa_instance.name %}
+            <h1>Update Your Form</h1>
+            <br/>
+            
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <br/>
+                <input type="submit" value="Update" class="btn btn-secondary">
+            </form>
+        {% else %}
+            <h2>Access Denied</h2>
+            <p>Only the original user can update this...</p>
+
+            <h4>Logged in User: {{ user }}</h4>
+            <h4>Name of Owner: {{ displa_instance.name }}</h4>
+            <br/><br/>
+        {% endif %}
+    {% else %}
+        <h1>Sorry! You must be logged in to view this page</h1>
+        <a href="{% url 'login' %}">Login here</a>
+    {% endif %}
+{% endblock %}

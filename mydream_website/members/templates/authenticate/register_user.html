@@ -1,0 +1,95 @@
+{% extends 'display/base.html' %}
+
+{% block content %}
+
+{% if form.errors %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    There was an error with your form..
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endif %}
+
+<div class="container" style="margin: 0 auto; min-height: 100vh;">
+  <div class="row justify-content-center align-items-center" style="height: 100vh;">
+    <div class="col-md-6">
+      <div class="shadow p-4 mb-5 bg-body rounded form-container">
+        <h1 class="text-center mb-4">Register Here</h1>
+
+        <form action="{% url 'register_user' %}" method="POST">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            {{ form.username }}
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            {{ form.email }}
+          </div>
+
+          <div class="mb-3">
+            <label for="password1" class="form-label">Password:</label>
+            {{ form.password1 }}
+          </div>
+
+          <div class="mb-3">
+            <label for="password2" class="form-label">Confirm Password:</label>
+            {{ form.password2 }}
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="subBtn">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<style>
+  @keyframes clicked {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+    75% { transform: rotate(-3deg); }
+    100% { transform: rotate(0deg); }
+  }
+.subBtn {
+    background: linear-gradient(135deg, #A29BD4, #635D9A); /* Purple gradient background color */
+    color: #ffffff; /* Text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    transition: all ease-in-out 0.2s; /* Transition effect */
+}
+
+.subBtn:hover {
+    transform: scale(1.2); /* Increase size on hover */
+}
+
+  .subBtn:active{
+    background: linear-gradient(135deg, #9388B3, #736397);
+    transform: scale(1.8);
+  }
+</style>
+
+<script>
+  const submitButton = document.getElementById('submitButton');
+  const submitForm = document.getElementById('submitForm');
+
+  submitButton.addEventListener('click', () => {
+    submitForm.submit();
+    submitButton.classList.add('clicked');
+    setTimeout(() => {
+      submitButton.classList.remove('clicked');1
+    }, 1000);
+  });
+</script>
+
+{% endblock %}
+
+
+
+
+

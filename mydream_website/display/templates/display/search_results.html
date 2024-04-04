@@ -1,0 +1,58 @@
+{% extends 'display/base.html' %}
+
+{% block content %}
+<div class="container"> <!-- Move the container div outside the if statement -->
+    {% if results %}
+    <br>
+        <h4><p>Showing results for '{{ query }}':</p></h4>
+        <br>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for displa in results %}
+                <!-- Display your search results here -->
+                <div class="col">
+                    <div class="card bg-gradient rounded">
+                        <div class="card-header bg-gradient-header text-black">
+                            {{ displa.name }}
+                        </div>
+                        <div class="card-body bg-gradient-body">
+                            <h5 class="card-title text-black">{{ displa.material }}</h5>
+                            <p class="card-text text-black">
+                                <ul class="list-unstyled">
+                                    <li><b>Year:</b> {{ displa.year }}</li>
+                                    <li><b>Mobile No:</b> {{ displa.contact }}</li>
+                                    <li><b>Email Address:</b> {{ displa.email }}</li>
+                                    <li><b>Price:</b> {{ displa.price }}</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No results found for '{{ query }}'</p>
+    {% endif %}
+</div>
+
+
+<style>
+  .bg-gradient {
+    background: linear-gradient(135deg, #9381ff, #A29BD4); /* Subtle purple gradient background */
+  }
+
+  .bg-gradient-header {
+    background: linear-gradient(135deg, #DACCFB, #A29BD4); /* Purple gradient background for header */
+  }
+
+  .bg-gradient-body {
+    background: linear-gradient(135deg, #E5D5F5, #B1A1D6); /* Lighter purple gradient background for body */
+  }
+
+  .text-black {
+    color: #000000; /* Black text color */
+  }
+</style>
+{% endblock %}
+
+
+

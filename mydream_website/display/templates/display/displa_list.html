@@ -1,0 +1,69 @@
+{% extends 'display/base.html' %}
+
+{% block content %}
+
+
+
+<div class="container">
+  <h1> Sellers:</h1>
+  <br>
+  <br>
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for displa in displa_list %}
+      <div class="col">
+        <div class="shadow p-3 bg-gradient rounded">
+          <div class="card mb-3 bg-custom">  <div class="card-header bg-gradient-header text-black">
+              <h4 class="card-title mb-0">{{ displa }}</h4>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ displa.material }}</h5>
+              <p class="card-text text-black">
+                <b>Year:</b> {{ displa.year }}<br>
+                <b>Mobile No:</b> {{ displa.contact }}<br>
+                <b>Email Address:</b> {{ displa.email }}<br>
+                <b>Price:</b> {{ displa.price }}
+              </p>
+            </div>
+            <div class="card-footer" style="background-color: transparent; padding-top: 1rem;">
+              <a href="{% url 'update-displa' displa.id %}" class="btn btn-outline-secondary btn-sm update-btn">Update</a>
+              <a href="{% url 'delete-displa' displa.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  ... (existing styles for gradients) ...
+  body {
+            background-color: #f8ceec;
+            background-image: linear-gradient(315deg, #f8ceec 0%, #f8ceec 74%);
+        }
+
+  .text-black {
+    color: #000000; /* Black text color */
+  }
+
+  .bg-custom { /* Update background style */
+    background-color: #f8ceec; /* Use one of the colors from the provided scheme */
+    background-image: linear-gradient(50deg, #f8ceec 0%, #a88beb 74%);
+    color: #000000; /* Black text color */
+  }
+</style>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
